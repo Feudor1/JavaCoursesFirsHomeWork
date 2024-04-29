@@ -11,7 +11,8 @@ public class Main{
             {
                 calc();
             }
-        else {
+        else
+        {
             System.out.println("Go and do" + order + " yourself");
         }
 
@@ -25,22 +26,12 @@ public class Main{
             double secondOpreand;
             double result;
             System.out.println("Enter the first number");
-            if (!scanner.hasNextDouble()) {
-                System.out.println("You've entered the wrong number");
-                scanner.close();
-                System.exit(1);
-            }
-            firstOperand = scanner.nextDouble();
+            firstOperand = inputNumberCheck();
+            System.out.println("Enter the second number");
+            secondOpreand = inputNumberCheck();
 
             System.out.println("Enter the operation: + - / *");
             operation = scanner.next().charAt(0);
-            System.out.println("Enter the second number");
-            if (!scanner.hasNextDouble()) {
-                System.out.println("You've entered the wrong number");
-                scanner.close();
-                System.exit(1);
-            }
-            secondOpreand = scanner.nextDouble();
 
             if (operation == '+')
             {
@@ -69,17 +60,32 @@ public class Main{
                 System.out.println("The result is " +result);
             }
 
-            if (operation == '/' && secondOpreand != 0) {
-                result = firstOperand / secondOpreand;
-                System.out.println("You entered the first number = " +firstOperand);
-                System.out.println("You entered the second number = " +secondOpreand);
-                System.out.println("You have chosen multiplication");
-                System.out.println("The result is " +result);
-            }
-            if (operation == '/' && secondOpreand == 0)
-            {
-                System.out.println("You can't divide by zero: " + firstOperand + " " + operation + " " + secondOpreand);
+            if (operation == '/') {
+                if (secondOpreand != 0) {
+                    result = firstOperand / secondOpreand;
+                    System.out.println("You entered the first number = " + firstOperand);
+                    System.out.println("You entered the second number = " + secondOpreand);
+                    System.out.println("You have chosen division");
+                    System.out.println("The result is " + result);
+                } else {
+                    System.out.println("You can't divide by zero: " + firstOperand + " " + operation + " " + secondOpreand);
+                }
             }
 
         }
+
+    public static double inputNumberCheck()
+    {
+        double Number;
+        Scanner scanner = new Scanner(System.in);
+        if (!scanner.hasNextDouble())
+        {
+            System.out.println("You've entered the wrong number");
+            scanner.close();
+            System.exit(1);
+        }
+        Number = scanner.nextDouble();
+
+        return (Number);
+    }
 }
