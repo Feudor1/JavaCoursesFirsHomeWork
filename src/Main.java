@@ -59,6 +59,10 @@ public class Main{
             {
                 sequence();
             }
+            else if (order.equalsIgnoreCase("table"))
+            {
+                multiplicationTable();
+            }
             else
             {
                 System.out.println("Go and do " + order + " yourself");
@@ -158,8 +162,9 @@ public class Main{
         System.out.println("Type the SeasonSwc to find out the time of year by month realised by Switch");
         System.out.println("Type the temperature to find out is it cold outside or not");
         System.out.println("Type the cycles to check 3 and 4 tasks");
-        System.out.println("Type the sum to to find out the sum to this number");
-        System.out.println("Type the seq to to see the sequence (task number 6)");
+        System.out.println("Type the sum to find out the sum to this number");
+        System.out.println("Type the seq to see the sequence (task number 6)");
+        System.out.println("Type the table to see the multiplication table");
     }
 
     //Тупо метод под работу с прогаммой, надо или нет, вызыам то цикла и после, печать так же вынес отдельно
@@ -447,6 +452,17 @@ public class Main{
             }
             else
                 System.out.println("Something went wrong");
+        }
+    }
+    //Таблица умножения. Кривенько, но как есть
+    public static void multiplicationTable()
+    {
+        for (int k = 10; k >= 0; k--)
+        {
+            for (int i = 0; i <= k; i++)
+            {
+                System.out.println(" " + i + "*" + k + " " + i*k);
+            }
         }
     }
 }
