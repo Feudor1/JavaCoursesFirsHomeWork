@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Random;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 
 public class Main{
@@ -90,6 +89,34 @@ public class Main{
             else if (order.equalsIgnoreCase("17"))
             {
                 checkTheMiddle();
+            }
+            else if (order.equalsIgnoreCase("18"))
+            {
+                checkTheDiagonalOf2DArray();
+            }
+            else if (order.equalsIgnoreCase("19"))
+            {
+                raiseTheArray();
+            }
+            else if (order.equalsIgnoreCase("20"))
+            {
+                chess();
+            }
+            else if (order.equalsIgnoreCase("21"))
+            {
+               summOf2dArray();
+            }
+            else if (order.equalsIgnoreCase("22"))
+            {
+                sortOfThe2DArrayByAsc();
+            }
+            else if (order.equalsIgnoreCase("23"))
+            {
+                sortOfThe2DArrayByDesc();
+            }
+            else if (order.equalsIgnoreCase("24"))
+            {
+                matrixMultiplication();
             }
             else
             {
@@ -199,6 +226,13 @@ public class Main{
         System.out.println("Type 15 Replacing an element of the array with an odd index with 0");
         System.out.println("Type 16 to see the Array of even number + max and min and middle");
         System.out.println("Type 17 to combine the middle of two arrays");
+        System.out.println("Type 18 to see the info about array's diagonals");
+        System.out.println("Type 19 to add the number to every element in the number");
+        System.out.println("Type 20 to see the Chess board");
+        System.out.println("Type 21 to see summ of 2D array");
+        System.out.println("Type 22 to sort the 2D array by Ascending");
+        System.out.println("Type 23 to sort the 2D array by Descending");
+        System.out.println("Type 24 to multiply the matrix");
     }
 
     //Тупо метод под работу с прогаммой, надо или нет, вызыам то цикла и после, печать так же вынес отдельно
@@ -702,7 +736,7 @@ public class Main{
 
         boolean flag = false;
         int k = 0;
-        int max = 0;
+        int max = badArray[0];
         int min = 0;
         int sum = 0;
         int counter = 0;
@@ -785,6 +819,322 @@ public class Main{
         if(middle1 < middle2)
         {
             System.out.println("Thr average of first array is smaller "+ middle1 +" < " + middle2);
+        }
+    }
+//Под задачу с диагоналями
+    public static void checkTheDiagonalOf2DArray()
+    {
+        //Тут создаем двумерный массив и заполняем значениями
+        //Есть нюанс, если матрица будет не квадратная, а именно, если число массивов будет > чем число
+        //Элеметов для каждого массива то упадем с ошибкой, по этому задаем размер массива через 1 переменную
+        System.out.println("Enter the volume of array");
+        int value = inputIntNumber();
+        int[][] arrayToCheckTheDiagonal = new int[value][value];
+        Random random= new Random();
+        System.out.println("Enter the range of random number that will be entered in the array");
+        System.out.println("Example: if you'll enter 10 - then there will be numbers from 0 to 9");
+        int randomNumber= inputIntNumber();
+        for (int i = 0; i < arrayToCheckTheDiagonal.length; i++ ){
+            for (int j = 0; j < arrayToCheckTheDiagonal[i].length; j++) {
+                arrayToCheckTheDiagonal[i][j] = random.nextInt(randomNumber);
+            }
+        }
+        //Тут работаем с главной диагональю
+        System.out.println("The main array is: ");
+        for (int i = 0; i < arrayToCheckTheDiagonal.length; i++) {
+            System.out.println(Arrays.toString(arrayToCheckTheDiagonal[i]));
+        }
+        System.out.println("The main diagonal is: ");
+        int sumOfMainDiagonal = 0;
+        for (int i = 0; i < arrayToCheckTheDiagonal.length ; i++) {
+                    System.out.println("[" + arrayToCheckTheDiagonal[i][i] + "]");
+                    sumOfMainDiagonal = sumOfMainDiagonal + arrayToCheckTheDiagonal[i][i];
+        }
+        System.out.println("The sum of all elements for main diagonal: " + sumOfMainDiagonal);
+        //Тут начинаем работать с побочной диагональю
+        System.out.println("The side diagonal is: ");
+        int sumOfSideDiagonal = 0;
+        //Тут возникла проблема с тем что бы брать элементы с индексом 0, 1 и тд из одномерного массива
+        //Ничего умнее чем завести под это дополнительную переменную я не придумал
+        //Второй цикл вроде не подходит, т.к. надо взять 1 элемент, а не всю строку
+        int j =0;
+        for (int i = value -1; i >= 0; i--)
+        {
+            System.out.println("[" + arrayToCheckTheDiagonal[i][j] + "]");
+            sumOfSideDiagonal = sumOfSideDiagonal + arrayToCheckTheDiagonal[i][j];
+            j++;
+        }
+        System.out.println("The sum of all elements for side diagonal: " + sumOfSideDiagonal);
+    }
+
+    // Задача по добавлению числа к каждому элементу трехмерного массива
+    public static void raiseTheArray()
+    {
+        System.out.println("Enter the volume of array");
+        int value = inputIntNumber();
+        int[][][] arrayToRaise = new int[value][value][value];
+        Random random= new Random();
+        System.out.println("Enter the range of random number that will be entered in the array");
+        System.out.println("Example: if you'll enter 10 - then there will be numbers from 0 to 9");
+        int randomNumber= inputIntNumber();
+        for (int i = 0; i < arrayToRaise.length; i++ )
+        {
+            for (int j = 0; j < arrayToRaise[i].length; j++)
+            {
+                for (int k = 0; k < arrayToRaise[j].length; k++)
+                {
+                    arrayToRaise[i][j][k] = random.nextInt(randomNumber);
+                }
+            }
+        }
+        System.out.println("The main array was:");
+        for (int i = 0; i < arrayToRaise.length; i++) {
+            for (int j = 0; j < arrayToRaise[i].length; j++) {
+                for (int k = 0; k < arrayToRaise[i][j].length; k++) {
+                    System.out.print(arrayToRaise[i][j][k] + " ");
+                }
+                System.out.println(); // Новая строка для каждой внутренней последовательности
+            }
+            System.out.println(); // Дополнительная пустая строка между слоями
+        }
+        System.out.println("Enter the value that you want to add to the array");
+        int summator = inputIntNumber();
+        for (int i = 0; i < arrayToRaise.length; i++ ){
+            for (int j = 0; j < arrayToRaise[i].length; j++) {
+                for (int k = 0; k < arrayToRaise[j].length; k++)
+                    arrayToRaise[i][j][k] =  arrayToRaise[i][j][k] + summator;
+            }
+        }
+        System.out.println("The new array is:");
+        for (int i = 0; i < arrayToRaise.length; i++) {
+            for (int j = 0; j < arrayToRaise[i].length; j++) {
+                for (int k = 0; k < arrayToRaise[i][j].length; k++) {
+                    System.out.print(arrayToRaise[i][j][k] + " ");
+                }
+                System.out.println(); // Новая строка для каждой внутренней последовательности
+            }
+            System.out.println(); // Дополнительная пустая строка между слоями
+        }
+    }
+    //Задача на вывод шахматной доски
+    public static void chess ()
+    {
+        char [][] chessArray = new char[8][8];
+        for (int i = 0; i < chessArray.length; i++ )
+        {
+            if (i%2 == 0)
+            {
+                for (int j = 0; j < chessArray[i].length; j++)
+                {
+                    if (j%2 == 0)
+                    {
+                        chessArray[i][j] = 'W';
+                    }
+                    else
+                    {
+                            chessArray[i][j] = 'B';
+                    }
+                }
+            }
+            else
+            {
+                for (int j = 0; j < chessArray[i].length; j++)
+                {
+                    if (j%2 == 0)
+                    {
+                        chessArray[i][j] = 'B';
+                    }
+                    else
+                    {
+                        chessArray[i][j] = 'W';
+                    }
+                }
+            }
+        }
+        for (int i = 0; i < chessArray.length; i++)
+        {
+            System.out.println(Arrays.toString(chessArray[i]));
+        }
+    }
+    //Задача на сумму элементов двумерного массива
+    public static void summOf2dArray()
+    {
+        System.out.println("Enter the number of arrays for 2d array");
+        int numberOfArrays = inputIntNumber();
+        System.out.println("Enter the value for each 1d array in 2d array");
+        int value = inputIntNumber();
+        int[][] arrayToCheckTheSumm = new int[numberOfArrays][value];
+        Random random= new Random();
+        System.out.println("Enter the range of random number that will be entered in the array");
+        System.out.println("Example: if you'll enter 10 - then there will be numbers from 0 to 9");
+        int randomNumber= inputIntNumber();
+        for (int i = 0; i < arrayToCheckTheSumm.length; i++ )
+        {
+            for (int j = 0; j < arrayToCheckTheSumm[i].length; j++)
+            {
+                arrayToCheckTheSumm[i][j] = random.nextInt(randomNumber);
+            }
+        }
+        System.out.println("The array is: ");
+        for (int i = 0; i < arrayToCheckTheSumm.length; i++)
+        {
+            System.out.println(Arrays.toString(arrayToCheckTheSumm[i]));
+        }
+        int sum = 0;
+        for (int i = 0; i < arrayToCheckTheSumm.length; i++ )
+        {
+            for (int j = 0; j < arrayToCheckTheSumm[i].length; j++)
+            {
+               sum  = sum + arrayToCheckTheSumm[i][j];
+            }
+        }
+        System.out.println("The total sum of all elements is " + sum);
+    }
+    //Сотировка двумерного массива по возрастанию
+    public static void sortOfThe2DArrayByAsc() {
+        //Тут создаем двумерный массив и заполняем значениями
+        System.out.println("Enter the number of arrays for 2d array");
+        int numberOfArrays = inputIntNumber();
+        System.out.println("Enter the value for each 1d array in 2d array");
+        int value = inputIntNumber();
+        int[][] arrayToSort = new int[numberOfArrays][value];
+        Random random = new Random();
+        System.out.println("Enter the range of random number that will be entered in the array");
+        System.out.println("Example: if you'll enter 10 - then there will be numbers from 0 to 9");
+        int randomNumber = inputIntNumber();
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            for (int j = 0; j < arrayToSort[i].length; j++)
+            {
+                arrayToSort[i][j] = random.nextInt(randomNumber);
+            }
+        }
+        //Вывели на печать изначальный массив
+        System.out.println("The array was: ");
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            System.out.println(Arrays.toString(arrayToSort[i]));
+        }
+        //Начинаем сортировать
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            for (int j = 0; j < arrayToSort[i].length; j++)
+            {
+                for (int k = 0; k < arrayToSort[j].length -1; k++)
+                {
+                    if (arrayToSort[j][k] > arrayToSort[j][k + 1])
+                    {
+                        int temp = arrayToSort[j][k+1];
+                        arrayToSort[j][k+1] = arrayToSort[j][k];
+                        arrayToSort[j][k] = temp;
+                    }
+                }
+            }
+        }
+        //Вывели на печать отсортированный массив
+        System.out.println("The new array is: ");
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            System.out.println(Arrays.toString(arrayToSort[i]));
+        }
+    }
+    public static void sortOfThe2DArrayByDesc() {
+        //Тут создаем двумерный массив и заполняем значениями
+        System.out.println("Enter the number of arrays for 2d array");
+        int numberOfArrays = inputIntNumber();
+        System.out.println("Enter the value for each 1d array in 2d array");
+        int value = inputIntNumber();
+        int[][] arrayToSort = new int[numberOfArrays][value];
+        Random random = new Random();
+        System.out.println("Enter the range of random number that will be entered in the array");
+        System.out.println("Example: if you'll enter 10 - then there will be numbers from 0 to 9");
+        int randomNumber = inputIntNumber();
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            for (int j = 0; j < arrayToSort[i].length; j++)
+            {
+                arrayToSort[i][j] = random.nextInt(randomNumber);
+            }
+        }
+        //Вывели на печать изначальный массив
+        System.out.println("The array was: ");
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            System.out.println(Arrays.toString(arrayToSort[i]));
+        }
+        //Начинаем сортировать
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            for (int j = 0; j < arrayToSort[i].length; j++)
+            {
+                for (int k = 0; k < arrayToSort[j].length -1; k++)
+                {
+                    if (arrayToSort[j][k] < arrayToSort[j][k + 1])
+                    {
+                        int temp = arrayToSort[j][k+1];
+                        arrayToSort[j][k+1] = arrayToSort[j][k];
+                        arrayToSort[j][k] = temp;
+                    }
+                }
+            }
+        }
+        //Вывели на печать отсортированный массив
+        System.out.println("The new array is: ");
+        for (int i = 0; i < arrayToSort.length; i++)
+        {
+            System.out.println(Arrays.toString(arrayToSort[i]));
+        }
+    }
+    //Умножение матриц
+    public static void matrixMultiplication()
+    {
+        //по условию задачи оба массива должны быть квадратными и одинаковой длинны
+        //По этому размеры массивов буду задавать 1 переменной
+        System.out.println("Enter the volume of array");
+        int value = inputIntNumber();
+        int[][] firstArrayToMultiply = new int[value][value];
+        int[][] secondArrayToMultiply = new int[value][value];
+        Random random = new Random();
+        System.out.println("Enter the range of random number that will be entered in the array");
+        System.out.println("Example: if you'll enter 10 - then there will be numbers from 0 to 9");
+        int randomNumber = inputIntNumber();
+        for (int i = 0; i < firstArrayToMultiply.length; i++)
+        {
+            for (int j = 0; j < firstArrayToMultiply[i].length; j++)
+            {
+                firstArrayToMultiply[i][j] = random.nextInt(randomNumber);
+                secondArrayToMultiply[i][j] = random.nextInt(randomNumber);
+            }
+        }
+
+        //До этого момента создали и заполнили оба массива
+        System.out.println("The arrays are: ");
+        for (int i = 0; i < firstArrayToMultiply.length; i++)
+        {
+            System.out.println(Arrays.toString(firstArrayToMultiply[i]));
+        }
+        System.out.println(" ");
+        for (int i = 0; i < secondArrayToMultiply.length; i++)
+        {
+            System.out.println(Arrays.toString(secondArrayToMultiply[i]));
+        }
+        //После вывода на печать начинаем работать с результирующим массивом
+        //Я решил сложить значения туда
+        int[][] resultArray = new int[value][value];
+        for (int i = 0; i < value; i++)
+        {
+            for (int j = 0; j < value; j++)
+            {
+                for (int k = 0; k < value; k++)
+                {
+                    resultArray[i][j] = resultArray[i][j] + firstArrayToMultiply[i][k] * secondArrayToMultiply[k][j];
+                }
+            }
+        }
+        System.out.println("The result array is: ");
+        for (int i = 0; i < firstArrayToMultiply.length; i++)
+        {
+            System.out.println(Arrays.toString(resultArray[i]));
         }
     }
 }
