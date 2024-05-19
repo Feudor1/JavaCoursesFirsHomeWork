@@ -3,5 +3,6 @@ public class SystemPrint {
     {
         System.out.println("Type the 1 if you want to see the old program stuff");
         System.out.println("Type the 2 to work with credit cards");
+        System.out.println("Type the 3 to work with flats");
     }
 }
